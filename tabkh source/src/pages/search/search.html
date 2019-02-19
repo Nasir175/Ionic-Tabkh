@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>البحث</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-searchbar placeholder="البحث عن الوصفات...." (ionInput)="searchRecipes($event)"></ion-searchbar>
+    
+    <ion-content class="card-background-page">
+
+    <ion-list [virtualScroll]="recipes">
+        <ion-item *virtualItem="let recipe; let i = index" (click)="showRecipe(i)" no-lines text-wrap>
+              <ion-card>
+                <img class="card-image" [src]="recipe.image01"/>
+             
+             <ion-card-content>
+                <ion-card-title>
+                    {{recipe.title}}
+                </ion-card-title>
+             </ion-card-content>
+
+            <ul class="card-recipes-info">
+                <li>
+                    <ion-icon name="md-time">{{recipe.cooktime}}</ion-icon>
+                </li>
+                <li>
+                    <ion-icon name="md-timer">{{recipe.preptime}}</ion-icon>
+                </li>
+                <li>
+                    <ion-icon name="md-body">{{recipe.servings}}</ion-icon>
+                </li>                                
+            </ul>
+
+        </ion-card>
+        </ion-item>    
+
+    </ion-list>
+    
+    </ion-content>
+
+</ion-content>
+

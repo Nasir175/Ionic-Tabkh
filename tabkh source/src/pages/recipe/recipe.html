@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{recipe.label}}</ion-title>
+
+      <ion-buttons end>
+          <button ion-button right icon-only (click)="bookmark()">
+            <ion-icon name="{{bookmarkicon}}"></ion-icon>
+          </button>
+      </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <img id="card-img" [src]="recipe.image01"/>
+
+    <ion-row id="recipe-info">
+        <ion-col>
+            <ion-icon class="recipe-info-icon" name="md-time">  {{recipe.cooktime}} <span class="recipe-info-label">الطهو</span></ion-icon>
+        </ion-col>
+        <ion-col>
+            <ion-icon class="recipe-info-icon" name="md-timer">  {{recipe.preptime}} <span class="recipe-info-label">الطهو</span></ion-icon>
+        </ion-col>
+        <ion-col>
+            <ion-icon class="recipe-info-icon" name="md-body">  {{recipe.servings}} <span class="recipe-info-label">الطهو</span></ion-icon>
+        </ion-col>                
+    </ion-row>
+
+    <h2 id="title-recipe">{{recipe.title}}</h2>
+
+    <div>
+        <ion-segment [(ngModel)]="taprecipe">
+            <ion-segment-button value="ingredients">
+                المقادير
+            </ion-segment-button>
+            <ion-segment-button value="method">
+                الخطوات
+            </ion-segment-button>
+            <ion-segment-button value="note" *ngIf="recipe.note">
+                إقتراحات
+            </ion-segment-button>                        
+        </ion-segment>
+    </div>
+
+    <div [ngSwitch]="taprecipe">
+        <ion-list *ngSwitchCase="'ingredients'">
+            <ion-item *ngFor="let ingredient of recipe.ingredient" text-wrap>
+                <ion-badge item-left>
+                    {{ingredient.qyt}}
+                </ion-badge>
+                <h4>{{ingredient.ingredient}}</h4>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'method'">
+            <ion-item *ngFor="let step of recipe.steps" text-wrap>
+                <ion-badge item-left>
+                    {{step.oorder}}
+                </ion-badge>
+                <h4>{{step.method}}</h4>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'note'">
+            <ion-item text-wrap>
+                <h4>{{recipe.note}}</h4>
+            </ion-item>
+        </ion-list>                
+    </div>
+
+
+
+</ion-content>
+
